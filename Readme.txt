@@ -1,10 +1,6 @@
 
 
 
-Current : test on forks
-
-test
-
 
 TODO : comprendre comment utiliser {% block %}{% endblock %}
 
