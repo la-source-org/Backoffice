@@ -1,0 +1,262 @@
+li a {
+    color: blue;
+}
+
+
+/* body {
+    background: white url("images/background.jpg") no-repeat;
+} */
+
+/*
+table {
+ border-width:1px;
+ border-style:solid;
+ border-color:white;
+ width:50%;
+ }
+
+td {
+ border-width:1px;
+ border-style:solid;
+ border-color:red;
+ width:50%;
+ }
+
+tab {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
+ body {background-color: coral;}
+*/
+
+
+
+
+ .table-borderless td,
+ .table-borderless th {
+     border: 0;
+     vertical-align: middle;
+ }
+
+
+ /* TODO : HEADER */
+
+ #header {
+     width: "100%";
+     height: auto;
+     display: flex;
+     justify-content: space-between;
+     align-items: left;
+     padding: 10px 40px;
+     /*background: #417690;*/
+     background: #FFA500;
+
+     color: #ffc;
+     overflow: hidden;
+ }
+
+ #header a:link, #header a:visited {
+     color: white;
+ }
+
+ #header a:focus , #header a:hover {
+     /*text-decoration: underline;*/
+ }
+
+
+
+ /* TODO : FUNCTION BAR */
+
+ #functionbar {
+     width: "100%";
+     height: auto;
+     display: flex;
+     justify-content: space-between;
+     align-items: left;
+     padding: 10px 40px;
+     background: #417690;
+     color: white;
+     overflow: hidden;
+ }
+
+#functionbar h1 {
+  color: white;
+  text-align: left;
+}
+
+#functionbar h3 {
+  color: white;
+  text-align: left;
+}
+
+#functionbar table {
+  color: white;
+  text-align: left;
+  font-weight: bold;
+
+}
+
+/* TODO : RESULT LIST */
+
+#resultlist {
+    width: "100%";
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    padding: 10px 40px;
+    background: #417690;
+    color: white;
+    overflow: hidden;
+}
+
+#resultlist h1 {
+ color: white;
+ text-align: left;
+}
+
+#resultlist h3 {
+ color: white;
+ text-align: left;
+}
+
+#resultlist table {
+ color: white;
+ text-align: left;
+ font-weight: bold;
+
+}
+
+
+
+
+ h1,h2,h3,h4,h5 {
+     font-weight: bold;
+ }
+
+ h1 {
+     margin: 0 0 20px;
+     font-weight: 300;
+     font-size: 28px;
+     color: #666;
+ }
+
+ h2 {
+     font-size: 16px;
+     margin: 1em 0 .5em 0;
+ }
+
+ h2.subhead {
+     font-weight: normal;
+     margin-top: 0;
+ }
+
+ h3 {
+     font-size: 14px;
+     margin: .8em 0 .3em 0;
+     color: #666;
+     font-weight: bold;
+ }
+
+ h4 {
+     font-size: 12px;
+     margin: 1em 0 .8em 0;
+     padding-bottom: 3px;
+ }
+
+ h5 {
+     font-size: 10px;
+     margin: 1.5em 0 .5em 0;
+     color: #666;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+ }
+
+
+ /* LINKS */
+
+ a:link, a:visited {
+     color: #447e9b;
+     text-decoration: none;
+ }
+
+ a:focus, a:hover {
+     color: #036;
+ }
+
+ a:focus {
+     text-decoration: underline;
+ }
+
+ a img {
+     border: none;
+ }
+
+ a.section:link, a.section:visited {
+     color: #fff;
+     text-decoration: none;
+ }
+
+ a.section:focus, a.section:hover {
+     text-decoration: underline;
+}
+
+
+/* FORM DEFAULTS */
+
+input, textarea, select, .form-row p, form .button {
+    margin: 2px 0;
+    padding: 2px 3px;
+    vertical-align: middle;
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 13px;
+}
+.form-row div.help {
+    padding: 2px 3px;
+}
+
+textarea {
+    vertical-align: top;
+}
+
+
+text {
+    horizontal-align: left;
+
+}
+
+input[type=text], input[type=password], input[type=email], input[type=url],
+input[type=number], input[type=tel], textarea, select, .vTextField {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 6px;
+    margin-top: 0;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus,
+input[type=url]:focus, input[type=number]:focus, input[type=tel]:focus,
+textarea:focus, select:focus, .vTextField:focus {
+    border-color: #999;
+}
+
+select {
+    height: 30px;
+}
+
+select[multiple] {
+    /* Allow HTML size attribute to override the height in the rule above. */
+    height: auto;
+    min-height: 150px;
+}

@@ -1,0 +1,40 @@
+li a {
+    color: blue;
+}
+
+
+/* body {
+    background: white url("images/background.jpg") no-repeat;
+} */
+
+
+table {
+ border-width:1px;
+ border-style:solid;
+ border-color:white;
+ width:50%;
+ }
+
+td {
+ border-width:1px;
+ border-style:solid;
+ border-color:red;
+ width:50%;
+ }
+
+tab {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
+ body {background-color: coral;} 

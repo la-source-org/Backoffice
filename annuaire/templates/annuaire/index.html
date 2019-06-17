@@ -1,0 +1,116 @@
+
+
+
+<head>
+  <title>La Source - Back-office</title>
+  <meta name="robots" content="NONE,NOARCHIVE">
+  <link rel="stylesheet" type="text/css" href="/static/annuaire/style.css">
+</head>
+
+
+{% load static %}
+
+
+<body class="" data-admin-utc-offset="0">
+
+    <!-- Header -->
+    <div id="header">
+        <table class="table table-borderless table-condensed table-hover">
+          <td align="left"><img src="{% static "annuaire/images/2018_LOGO-LA-SOURCE.jpg" %}" height="60" width="60"></td>
+          <td><h1 id="site-name"><a href="/annuaire/">La Source - Back-office</a></h1></td>
+        </table>
+    </div>
+    <!-- END Header -->
+
+
+    <!-- Function bar -->
+
+    <div id="functionbar">
+      <br>
+      <h1 class="h1">Annuaire</h1>
+      <br>
+    </div>
+
+  <div id="functionbar">
+    <table class="table table-borderless table-condensed table-hover">
+    <tr><th>Type de contact :</tr>
+    <tr><th>
+      <div>
+        <input type="radio" id="Membre" name="type" value="Membre" checked>
+        <label for="Membre">Membre</label>
+      </div>
+    </th></tr>
+    <tr><th>  <div>
+        <input type="radio" id="Partenaire" name="type" value="Partenaire" checked>
+        <label for="Partenaire">Partenaire</label>
+      </div>
+    </th></tr>
+    <tr><th><div>
+        <input type="radio" id="Relais" name="type" value="Relais" checked>
+        <label for="Relais">Relais</label>
+      </div>
+    </th></tr>
+    <tr><th><div>
+        <input type="radio" id="Fournisseur" name="type" value="Fournisseur" checked>
+        <label for="Fournisseur">Fournisseur</label>
+      </div>
+    </th></tr>
+
+  </table>
+  <br>
+
+  </div>
+
+  <div id="functionbar">
+    <table class="table table-borderless table-condensed table-hover">
+      <tr>
+        <th width="200"><label for="Membre">Localisation</label></th>
+        <th><input type="text" id="location" name="location" maxlength="8" size="20"></th>
+      </tr>
+      <tr>
+        <th width="200"><label for="Membre">Nom</label></th>
+        <th><input type="text" id="name" name="name" maxlength="8" size="20"></th>
+      </tr>
+
+      <tr><th>
+      <button type="button">Lancer la recherche</button>
+      </th></tr>
+  </table>
+</div>
+
+    <!-- END Function bar -->
+
+    <div id="resultlist">
+      <hr width="100%" color="black">
+    </div>
+
+    <div id="resultlist">
+      <h1>Liste des adhérents</h1></div>
+
+    {% if member_list %}
+
+        <ul><table>
+
+          <tr>
+          <th align="left">Nom</a></th>
+          <th>Date de naissance</th>
+          <th>Fonction</th>
+        </tr>
+
+
+        {% for member in member_list %}
+
+        <tr>
+        <th align="left"><a href="{% url 'polls:adherent_detail' member.id%}">{{ member.surname }} {{ member.name }}</a></th>
+        <th>{{ member.birth_date|date:'M d Y' }}</th>
+        <th>{{ member.get_member_type_display }}</th>
+      </tr>
+
+        {% endfor %}
+
+      </table></ul>
+    {% else %}
+        <p>La liste d'adhérents est vide.</p>
+    {% endif %}
+
+  </div>
