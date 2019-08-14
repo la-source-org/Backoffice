@@ -12,26 +12,22 @@ from django.utils import timezone
 #   TODO : mettre les models a jour
 
 ################################################################################
-class Contact(models.Model):
+class Fournisseur(models.Model):
 
-    id = models.IntegerField(primary_key=True)
-    nom = models.CharField(max_length=32)
-    prenom = models.CharField(max_length=32)
-    email = models.CharField(max_length=32)
-    telephone = models.CharField(max_length=20)
-    addresse = models.CharField(max_length=64)
-    code_postal  = models.CharField(max_length=8)
-    ville = models.CharField(max_length=32)
-    pays = models.CharField(max_length=32)
-    telephone_portable = models.CharField(max_length=20)
-    origine_du_contact = models.CharField(max_length=32)
-    commentaires = models.CharField(max_length=32)
-    id_fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
-    id_relais = models.ForeignKey(Relais, on_delete=models.CASCADE)
-    id_lieu = models.ForeignKey(Lieu, on_delete=models.CASCADE)
+    id_fournisseur = models.CharField(primary_key=True, max_length=45)
+    type_fournisseur = models.CharField(max_length=45)
+    statut = models.CharField(max_length=45)
+    adresse = models.CharField(max_length=45)
+    code_postal = models.CharField(max_length=45)
+    ville = models.CharField(max_length=45)
+    pays = models.CharField(max_length=45)
+    mode_livraison = models.CharField(max_length=45)
+    siret = models.CharField(max_length=45)
+    commentaires = models.CharField(max_length=45)
 
     def __str__(self):
-        return str(self.id) + " " + self.nom + " " + self.prenom
+        return str(self.id_adherents)
+
 
 ################################################################################
 class Lieu(models.Model):
@@ -60,6 +56,98 @@ class Relais(models.Model):
     def __str__(self):
         return str(self.id) + " " + self.nom_structure + " " + self.type_public
 
+
+
+
+
+
+
+################################################################################
+class Categorie(models.Model):
+
+    nom = models.CharField(primary_key=True, max_length=45)
+
+    def __str__(self):
+        return str(self.nom)
+
+################################################################################
+class Sous_categorie(models.Model):
+
+    nom = models.CharField(primary_key=True, max_length=45)
+    categorie_nom = models.ForeignKey(Categorie, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.nom)
+
+################################################################################
+class Produits_possibles(models.Model):
+
+    uid = models.CharField(primary_key=True, max_length=45)
+    id_fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
+    sous_categorie = models.ForeignKey(Sous_categorie, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.uid)
+
+
+
+################################################################################
+class Label(models.Model):
+
+    id_label = models.IntegerField(primary_key=True)
+    AOC = models.IntegerField()
+    AOP = models.IntegerField()
+    BIO = models.IntegerField()
+    NP = models.IntegerField()
+    Demeter = models.IntegerField()
+    label_rouge = models.IntegerField()
+    fair_trade = models.IntegerField()
+
+    def __str__(self):
+        return str(self.id_label)
+
+
+################################################################################
+class Produit_references(models.Model):
+
+    nom = models.CharField(primary_key=True, max_length=45)
+    type = models.CharField(max_length=45)
+    description = models.IntegerField()
+    prix = models.CharField(max_length=45)
+    mode_conditionnement = models.CharField(max_length=45)
+
+    id_fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
+    id_label = models.ForeignKey(Label, on_delete=models.CASCADE)
+    nom_categorie = models.ForeignKey(Sous_categorie, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.id_adherents)
+
+
+
+################################################################################
+class Contact(models.Model):
+
+    id = models.IntegerField(primary_key=True)
+    nom = models.CharField(max_length=32)
+    prenom = models.CharField(max_length=32)
+    email = models.CharField(max_length=32)
+    telephone = models.CharField(max_length=20)
+    addresse = models.CharField(max_length=64)
+    code_postal  = models.CharField(max_length=8)
+    ville = models.CharField(max_length=32)
+    pays = models.CharField(max_length=32)
+    telephone_portable = models.CharField(max_length=20)
+    origine_du_contact = models.CharField(max_length=32)
+    commentaires = models.CharField(max_length=32)
+    id_fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
+    id_relais = models.ForeignKey(Relais, on_delete=models.CASCADE)
+    id_lieu = models.ForeignKey(Lieu, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.id) + " " + self.nom + " " + self.prenom
+
+
 ################################################################################
 class Adherents(models.Model):
 
@@ -83,6 +171,16 @@ class Adherents(models.Model):
     def __str__(self):
         return str(self.id_adherents)
 
+
+################################################################################
+class Competences_possibles(models.Model):
+
+    nom = models.CharField(max_length=45, primary_key=True)
+
+    def __str__(self):
+        return str(self.nom)
+
+
 ################################################################################
 class Competences(models.Model):
 
@@ -95,12 +193,13 @@ class Competences(models.Model):
         return str(self.id_adherents) + " " + str(self.nom)
 
 ################################################################################
-class Competences_possibles(models.Model):
+class Groupes_possibles(models.Model):
 
     nom = models.CharField(max_length=45, primary_key=True)
 
     def __str__(self):
         return str(self.nom)
+
 
 ################################################################################
 class Groupes(models.Model):
@@ -112,93 +211,6 @@ class Groupes(models.Model):
 
     def __str__(self):
         return str(self.id_adherents) + " " + str(self.role)
-
-################################################################################
-class Groupes_possibles(models.Model):
-
-    nom = models.CharField(max_length=45, primary_key=True)
-
-    def __str__(self):
-        return str(self.nom)
-
-################################################################################
-class Fournisseur_(models.Model):
-
-    id_fournisseur = models.CharField(primary_key=True, max_length=45)
-    type_fournisseur = models.CharField(max_length=45)
-    statut = models.CharField(max_length=45)
-    adresse = models.CharField(max_length=45)
-    code_postal = models.CharField(max_length=45)
-    ville = models.CharField(max_length=45)
-    pays = models.CharField(max_length=45)
-    mode_livraison = models.CharField(max_length=45)
-    siret = models.CharField(max_length=45)
-    commentaires = models.CharField(max_length=45)
-
-    def __str__(self):
-        return str(self.id_adherents)
-
-################################################################################
-class Produits_possibles(models.Model):
-
-    uid = models.CharField(primary_key=True, max_length=45)
-    id_fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
-    sous_categorie = models.ForeignKey(Sous_categorie, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.uid)
-
-################################################################################
-class Sous_categorie(models.Model):
-
-    nom = models.CharField(primary_key=True, max_length=45)
-    categorie_nom = models.ForeignKey(Categorie, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.nom)
-
-################################################################################
-class Categorie(models.Model):
-
-    nom = models.CharField(primary_key=True, max_length=45)
-
-    def __str__(self):
-        return str(self.nom)
-
-
-################################################################################
-class Produit_references(models.Model):
-
-    nom = models.CharField(primary_key=True, max_length=45)
-    type = models.CharField(max_length=45)
-    description = models.IntegerField()
-    prix = models.CharField(max_length=45)
-    mode_conditionnement = models.CharField(max_length=45)
-
-    id_fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
-    id_label = models.ForeignKey(Label, on_delete=models.CASCADE)
-    nom_categorie = models.ForeignKey(Sous_categorie, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.id_adherents)
-
-
-################################################################################
-class Label(models.Model):
-
-    id_label = models.IntegerField(primary_key=True)
-    AOC = models.IntegerField()
-    AOP = models.IntegerField()
-    BIO = models.IntegerField()
-    NP = models.IntegerField()
-    Demeter = models.IntegerField()
-    label_rouge = models.IntegerField()
-    fair_trade = models.IntegerField()
-
-    def __str__(self):
-        return str(self.id_label)
-
-
 
 
 
@@ -230,18 +242,18 @@ class Membre(models.Model):
     def __str__(self):
         return str(self.id) + " " + self.date_naissance + " " + self.get_sous_type_display()
 
-################################################################################
-class Fournisseur(models.Model):
-
-    id = models.IntegerField(primary_key=True)
-    id_contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
-
-    FOURNISSEUR_TYPE = (("A", "Adherent"), ("M", "Membre"), ("D", "Donateur"))
-    type = models.CharField(max_length=1,choices=FOURNISSEUR_TYPE,default="F")
-    status = models.CharField(max_length=20)
-
-    def __str__(self):
-        return str(self.id) + " " + self.get_fournisseur_type_display()
+# ################################################################################
+# class Fournisseur2(models.Model):
+#
+#     id = models.IntegerField(primary_key=True)
+#     id_contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
+#
+#     FOURNISSEUR_TYPE = (("A", "Adherent"), ("M", "Membre"), ("D", "Donateur"))
+#     type = models.CharField(max_length=1,choices=FOURNISSEUR_TYPE,default="F")
+#     status = models.CharField(max_length=20)
+#
+#     def __str__(self):
+#         return str(self.id) + " " + self.get_fournisseur_type_display()
 
 
 ################################################################################
